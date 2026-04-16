@@ -3,226 +3,135 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>InstaAgent</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<title>InstaAgent – SMM Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --pink: #e91e8c;
-    --pink2: #ff5ec4;
-    --dark: #0d0d14;
-    --card: #13131f;
-    --border: rgba(233,30,140,0.18);
-    --text: #f0eaff;
-    --muted: #9490aa;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--dark); color:var(--text); font-family:'DM Sans',sans-serif; min-height:100vh; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0d14;color:#f0eaff;font-family:'DM Sans',sans-serif;min-height:100vh}
 
-  /* NAV */
-  nav {
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 24px;
-    background:rgba(13,13,20,0.95);
-    border-bottom:1px solid var(--border);
-    position:sticky; top:0; z-index:100;
-    backdrop-filter:blur(12px);
-  }
-  .logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.4rem; color:#fff; }
-  .logo span { color:var(--pink); }
-  .nav-links { display:flex; gap:20px; }
-  .nav-links a { color:var(--muted); text-decoration:none; font-size:.9rem; transition:.2s; }
-  .nav-links a:hover { color:#fff; }
-  .btn-nav {
-    background:linear-gradient(135deg,var(--pink),var(--pink2));
-    color:#fff; border:none; padding:9px 20px;
-    border-radius:50px; font-family:'Syne',sans-serif; font-weight:600;
-    cursor:pointer; font-size:.9rem;
-  }
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#0d0d14;border-bottom:1px solid rgba(233,30,140,.2);position:sticky;top:0;z-index:100}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:#fff}
+.logo span{color:#e91e8c}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-ch{color:#25d366;text-decoration:none;font-size:.8rem;font-weight:600}
+.nav-btn{background:linear-gradient(135deg,#e91e8c,#ff5ec4);color:#fff;border:none;padding:8px 18px;border-radius:50px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;font-size:.85rem}
 
-  /* HERO */
-  .hero {
-    text-align:center; padding:70px 24px 50px;
-    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(233,30,140,.15), transparent);
-  }
-  .badge {
-    display:inline-block; background:rgba(233,30,140,.12);
-    border:1px solid var(--border); color:var(--pink2);
-    padding:5px 16px; border-radius:50px; font-size:.8rem;
-    font-family:'Syne',sans-serif; font-weight:600; margin-bottom:18px;
-    animation: fadeUp .6s ease both;
-  }
-  .hero h1 {
-    font-family:'Syne',sans-serif; font-size:clamp(2rem,6vw,3.2rem);
-    font-weight:800; line-height:1.15; margin-bottom:16px;
-    animation: fadeUp .7s ease both;
-  }
-  .hero h1 span {
-    background:linear-gradient(90deg,var(--pink),var(--pink2));
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  }
-  .hero p { color:var(--muted); max-width:480px; margin:0 auto 32px; font-size:1rem; animation:fadeUp .8s ease both; }
-  .hero-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; animation:fadeUp .9s ease both; }
-  .btn-primary {
-    background:linear-gradient(135deg,var(--pink),var(--pink2));
-    color:#fff; border:none; padding:13px 32px;
-    border-radius:50px; font-family:'Syne',sans-serif; font-weight:700;
-    cursor:pointer; font-size:1rem; box-shadow:0 0 30px rgba(233,30,140,.3);
-    transition:.2s;
-  }
-  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 0 40px rgba(233,30,140,.5); }
-  .btn-outline {
-    background:transparent; color:#fff;
-    border:1px solid rgba(255,255,255,.2);
-    padding:13px 32px; border-radius:50px;
-    font-family:'Syne',sans-serif; font-weight:600;
-    cursor:pointer; font-size:1rem; transition:.2s;
-  }
-  .btn-outline:hover { border-color:var(--pink); color:var(--pink2); }
+/* TICKER */
+.ticker-wrap{background:#0a1a0f;border-bottom:1px solid rgba(37,211,102,.2);padding:9px 0;overflow:hidden;position:relative}
+.ticker-track{display:flex;width:max-content;animation:ticker 40s linear infinite}
+.ticker-item{padding:0 24px;font-size:.78rem;color:#888;white-space:nowrap}
+.ticker-item b{color:#25d366}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-  /* STATS */
-  .stats {
-    display:flex; justify-content:center; gap:40px; flex-wrap:wrap;
-    padding:30px 24px;
-    border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-    background:var(--card);
-  }
-  .stat { text-align:center; }
-  .stat-num { font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; color:var(--pink2); }
-  .stat-label { font-size:.8rem; color:var(--muted); margin-top:2px; }
+/* HERO */
+.hero{text-align:center;padding:38px 20px 28px;background:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(233,30,140,.13),transparent)}
+.badge{display:inline-block;background:rgba(233,30,140,.12);border:1px solid rgba(233,30,140,.3);color:#ff5ec4;padding:5px 16px;border-radius:50px;font-size:.78rem;font-family:'Syne',sans-serif;font-weight:700;margin-bottom:14px}
+.hero h1{font-family:'Syne',sans-serif;font-size:1.85rem;font-weight:800;line-height:1.2;margin-bottom:12px}
+.hero h1 span{color:#e91e8c}
+.hero p{color:#9490aa;font-size:.88rem;margin-bottom:22px;line-height:1.6}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-p{background:linear-gradient(135deg,#e91e8c,#ff5ec4);color:#fff;border:none;padding:12px 28px;border-radius:50px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;font-size:.9rem;box-shadow:0 0 20px rgba(233,30,140,.3)}
+.btn-o{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2);padding:12px 28px;border-radius:50px;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;font-size:.9rem}
 
-  /* PLATFORM TABS */
-  .section { padding:50px 24px; max-width:700px; margin:0 auto; }
-  .section-title { font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:8px; }
-  .section-sub { color:var(--muted); font-size:.9rem; margin-bottom:28px; }
+/* REAL-TIME COUNTER */
+.counter-bar{display:flex;justify-content:center;gap:0;background:#13131f;border-top:1px solid rgba(233,30,140,.1);border-bottom:1px solid rgba(233,30,140,.1);overflow:hidden}
+.counter-item{flex:1;text-align:center;padding:14px 8px;border-right:1px solid rgba(255,255,255,.05);position:relative}
+.counter-item:last-child{border-right:none}
+.c-num{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#ff5ec4;transition:all .3s}
+.c-num.flash{color:#fff;transform:scale(1.1)}
+.c-lbl{font-size:.7rem;color:#555;margin-top:2px}
+.c-live{display:inline-block;width:6px;height:6px;border-radius:50%;background:#25d366;margin-right:4px;animation:blink 1s infinite;vertical-align:middle}
 
-  .tabs { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px; }
-  .tab {
-    padding:8px 18px; border-radius:50px; font-size:.85rem; font-weight:500;
-    border:1px solid var(--border); background:transparent; color:var(--muted);
-    cursor:pointer; transition:.2s; font-family:'DM Sans',sans-serif;
-  }
-  .tab.active { background:linear-gradient(135deg,var(--pink),var(--pink2)); color:#fff; border-color:transparent; }
+/* LIVE FEED */
+.live-section{max-width:680px;margin:18px auto 0;padding:0 16px}
+.live-hdr{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.dot{width:8px;height:8px;border-radius:50%;background:#e91e8c;box-shadow:0 0 8px #e91e8c;animation:blink 1.2s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.live-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem}
+.live-sub{color:#555;font-size:.75rem}
+.feed-item{display:flex;align-items:center;gap:10px;background:#13131f;border:1px solid rgba(233,30,140,.1);border-radius:10px;padding:10px 12px;margin-bottom:8px;animation:slideIn .35s ease}
+@keyframes slideIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
+.feed-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;font-weight:700;font-family:'Syne',sans-serif}
+.feed-txt{flex:1;font-size:.8rem;line-height:1.4}
+.feed-txt strong{color:#fff}
+.feed-handle{color:#ff5ec4;font-size:.75rem}
+.feed-meta{color:#444;font-size:.7rem;margin-top:2px}
+.feed-ok{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.2);color:#25d366;font-size:.68rem;padding:3px 8px;border-radius:50px;white-space:nowrap;font-weight:600;flex-shrink:0}
 
-  /* PLANS */
-  .plans { display:flex; flex-direction:column; gap:12px; }
-  .plan-card {
-    display:flex; align-items:center; justify-content:space-between;
-    background:var(--card); border:1px solid var(--border);
-    border-radius:14px; padding:16px 20px;
-    transition:.2s; cursor:pointer;
-  }
-  .plan-card:hover { border-color:var(--pink); transform:translateX(4px); }
-  .plan-card.featured { border-color:var(--pink); background:rgba(233,30,140,.07); }
-  .plan-badge { background:var(--pink); color:#fff; font-size:.65rem; font-weight:700; padding:2px 8px; border-radius:50px; margin-left:8px; font-family:'Syne',sans-serif; }
-  .plan-name { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; }
-  .plan-desc { color:var(--muted); font-size:.8rem; margin-top:2px; }
-  .plan-price {
-    background:linear-gradient(135deg,var(--pink),var(--pink2));
-    color:#fff; padding:8px 18px; border-radius:50px;
-    font-family:'Syne',sans-serif; font-weight:700; font-size:.95rem;
-    white-space:nowrap; border:none; cursor:pointer;
-  }
+/* WA BANNER */
+.wa-wrap{max-width:680px;margin:16px auto;padding:0 16px}
+.wa-inner{display:flex;align-items:center;gap:12px;background:#0a1a0f;border:1px solid rgba(37,211,102,.3);border-radius:12px;padding:14px 16px;text-decoration:none}
+.wa-t1{font-family:'Syne',sans-serif;font-weight:700;color:#25d366;font-size:.9rem}
+.wa-t2{color:#555;font-size:.75rem;margin-top:2px}
+.wa-b{background:#25d366;color:#fff;padding:7px 14px;border-radius:50px;font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;white-space:nowrap;margin-left:auto}
 
-  /* ORDER FORM */
-  .order-section {
-    background:var(--card); border:1px solid var(--border);
-    border-radius:20px; padding:28px 24px; max-width:700px; margin:0 auto 50px;
-  }
-  .order-section h2 { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; margin-bottom:6px; }
-  .order-section p { color:var(--muted); font-size:.85rem; margin-bottom:20px; }
-  .form-group { margin-bottom:16px; }
-  .form-group label { display:block; font-size:.8rem; font-weight:500; color:var(--muted); margin-bottom:6px; }
-  .form-group input, .form-group select {
-    width:100%; background:#0d0d14; border:1px solid var(--border);
-    color:#fff; padding:12px 16px; border-radius:12px;
-    font-family:'DM Sans',sans-serif; font-size:.95rem;
-    outline:none; transition:.2s;
-  }
-  .form-group input:focus, .form-group select:focus { border-color:var(--pink); }
-  .form-group select option { background:#1a1a2e; }
-  .btn-order {
-    width:100%; background:linear-gradient(135deg,var(--pink),var(--pink2));
-    color:#fff; border:none; padding:14px;
-    border-radius:12px; font-family:'Syne',sans-serif; font-weight:700;
-    cursor:pointer; font-size:1rem; margin-top:8px;
-    box-shadow:0 0 24px rgba(233,30,140,.3); transition:.2s;
-  }
-  .btn-order:hover { transform:translateY(-2px); box-shadow:0 0 36px rgba(233,30,140,.5); }
+/* PLANS */
+.plans-sec{max-width:680px;margin:0 auto;padding:0 16px 16px}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.sec-sub{color:#555;font-size:.82rem;margin-bottom:16px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab{padding:7px 16px;border-radius:50px;font-size:.8rem;font-weight:600;border:1px solid rgba(233,30,140,.2);background:transparent;color:#9490aa;cursor:pointer;font-family:'DM Sans',sans-serif}
+.tab.active{background:linear-gradient(135deg,#e91e8c,#ff5ec4);color:#fff;border-color:transparent}
+.pw{display:none;flex-direction:column;gap:10px}
+.pw.active{display:flex}
+.pc{display:flex;align-items:center;justify-content:space-between;background:#13131f;border:1px solid rgba(233,30,140,.1);border-radius:12px;padding:14px 16px;cursor:pointer;transition:.15s}
+.pc:active{transform:scale(.98)}
+.pc.hot{border-color:rgba(233,30,140,.4);background:rgba(233,30,140,.05)}
+.pname{font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem}
+.pdesc{color:#555;font-size:.75rem;margin-top:2px}
+.ptag{background:#e91e8c;color:#fff;font-size:.58rem;font-weight:700;padding:2px 7px;border-radius:50px;margin-left:6px;font-family:'Syne',sans-serif;vertical-align:middle}
+.pprice{background:linear-gradient(135deg,#e91e8c,#ff5ec4);color:#fff;border:none;padding:8px 16px;border-radius:50px;font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;white-space:nowrap}
+.buyers{color:#555;font-size:.68rem;margin-top:3px}
+.buyers span{color:#ffaa00}
 
-  /* PAYMENT MODAL */
-  .modal-overlay {
-    display:none; position:fixed; inset:0;
-    background:rgba(0,0,0,.7); z-index:999;
-    backdrop-filter:blur(6px);
-    align-items:center; justify-content:center;
-  }
-  .modal-overlay.open { display:flex; }
-  .modal {
-    background:var(--card); border:1px solid var(--border);
-    border-radius:20px; padding:32px 28px; max-width:380px; width:90%;
-    animation:fadeUp .3s ease;
-  }
-  .modal h3 { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; margin-bottom:6px; }
-  .modal p { color:var(--muted); font-size:.85rem; margin-bottom:20px; }
-  .upi-box {
-    background:#0d0d14; border:1px solid var(--border);
-    border-radius:12px; padding:16px; text-align:center; margin-bottom:16px;
-  }
-  .upi-label { font-size:.75rem; color:var(--muted); margin-bottom:4px; }
-  .upi-id { font-family:'Syne',sans-serif; font-weight:700; font-size:1.05rem; color:var(--pink2); }
-  .upi-amount { font-size:.85rem; color:var(--muted); margin-top:6px; }
-  .upi-amount span { color:#fff; font-weight:600; }
-  .steps { margin-bottom:20px; }
-  .step { display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; font-size:.85rem; }
-  .step-num {
-    min-width:22px; height:22px; border-radius:50%;
-    background:linear-gradient(135deg,var(--pink),var(--pink2));
-    display:flex; align-items:center; justify-content:center;
-    font-size:.7rem; font-weight:700; font-family:'Syne',sans-serif;
-  }
-  .btn-upi {
-    display:block; width:100%;
-    background:linear-gradient(135deg,#00c853,#00e676);
-    color:#fff; border:none; padding:13px;
-    border-radius:12px; font-family:'Syne',sans-serif; font-weight:700;
-    cursor:pointer; font-size:.95rem; text-decoration:none; text-align:center;
-    margin-bottom:10px;
-  }
-  .btn-close {
-    display:block; width:100%; background:transparent;
-    border:1px solid var(--border); color:var(--muted);
-    padding:11px; border-radius:12px; font-family:'Syne',sans-serif;
-    font-weight:600; cursor:pointer; font-size:.9rem;
-  }
+/* ORDER */
+.order-sec{max-width:680px;margin:20px auto;padding:0 16px}
+.order-card{background:#13131f;border:1px solid rgba(233,30,140,.2);border-radius:16px;padding:22px 18px}
+.order-card h2{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:4px}
+.order-sub{color:#555;font-size:.82rem;margin-bottom:18px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:.78rem;color:#777;margin-bottom:5px;font-weight:500}
+.fg input,.fg select{width:100%;background:#0d0d14;border:1px solid rgba(233,30,140,.2);color:#f0eaff;padding:11px 14px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;-webkit-appearance:none}
+.fg select option{background:#1a1a2e;color:#fff}
+.fg .hint{font-size:.72rem;color:#555;margin-top:4px}
+.platform-row{display:flex;gap:8px;margin-bottom:14px}
+.plat-btn{flex:1;padding:10px 8px;border-radius:10px;border:1px solid rgba(233,30,140,.2);background:#0d0d14;color:#777;font-size:.78rem;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;text-align:center;transition:.15s}
+.plat-btn.sel{border-color:#e91e8c;background:rgba(233,30,140,.1);color:#ff5ec4}
+.account-preview{background:#0d0d14;border:1px solid rgba(233,30,140,.2);border-radius:10px;padding:12px 14px;margin-bottom:14px;display:none}
+.account-preview.show{display:flex;align-items:center;gap:10px}
+.ap-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#ff5ec4);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;flex-shrink:0}
+.ap-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem}
+.ap-handle{color:#ff5ec4;font-size:.78rem}
+.ap-check{margin-left:auto;color:#25d366;font-size:.8rem;font-weight:600}
+.btn-order{width:100%;background:linear-gradient(135deg,#e91e8c,#ff5ec4);color:#fff;border:none;padding:14px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;font-size:.95rem;margin-top:4px;box-shadow:0 0 20px rgba(233,30,140,.25)}
 
-  /* FEATURES */
-  .features {
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:14px; max-width:700px; margin:0 auto 50px; padding:0 24px;
-  }
-  .feature-card {
-    background:var(--card); border:1px solid var(--border);
-    border-radius:14px; padding:20px 16px; text-align:center;
-  }
-  .feature-icon { font-size:1.8rem; margin-bottom:10px; }
-  .feature-title { font-family:'Syne',sans-serif; font-weight:700; font-size:.9rem; margin-bottom:4px; }
-  .feature-text { color:var(--muted); font-size:.78rem; }
+/* FEATURES */
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:680px;margin:0 auto 28px;padding:0 16px}
+.feat{background:#13131f;border:1px solid rgba(233,30,140,.1);border-radius:12px;padding:16px;text-align:center}
+.fi{font-size:1.5rem;margin-bottom:8px}
+.ft{font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;margin-bottom:3px}
+.fd{color:#555;font-size:.74rem}
 
-  /* FOOTER */
-  footer {
-    text-align:center; padding:24px; border-top:1px solid var(--border);
-    color:var(--muted); font-size:.8rem;
-  }
-  footer span { color:var(--pink2); }
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:999;align-items:center;justify-content:center;padding:16px}
+.overlay.open{display:flex}
+.modal{background:#13131f;border:1px solid rgba(233,30,140,.3);border-radius:18px;padding:24px 18px;width:100%;max-width:360px}
+.modal h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:4px}
+.msub{color:#555;font-size:.8rem;margin-bottom:18px}
+.upi-box{background:#0d0d14;border:1px solid rgba(233,30,140,.2);border-radius:10px;padding:14px;text-align:center;margin-bottom:14px}
+.ul{font-size:.72rem;color:#555;margin-bottom:4px}
+.uid{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:#ff5ec4}
+.uamt{font-size:.82rem;color:#777;margin-top:6px}
+.uamt b{color:#fff}
+.steps{margin-bottom:16px}
+.step{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;font-size:.82rem;color:#bbb}
+.snum{min-width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#ff5ec4);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;font-family:'Syne',sans-serif;flex-shrink:0;color:#fff}
+.mbtn{display:block;width:100%;color:#fff;border:none;padding:12px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;font-size:.88rem;text-decoration:none;text-align:center;margin-bottom:8px}
 
-  @keyframes fadeUp {
-    from { opacity:0; transform:translateY(20px); }
-    to { opacity:1; transform:translateY(0); }
-  }
-
-  /* HIDDEN PLAN DATA */
-  .plan-cards-wrap { display:none; }
-  .plan-cards-wrap.active { display:flex; flex-direction:column; gap:12px; }
+/* FOOTER */
+footer{text-align:center;padding:20px 16px;border-top:1px solid rgba(233,30,140,.1);color:#444;font-size:.78rem}
+footer a{color:#25d366;text-decoration:none}
 </style>
 </head>
 <body>
@@ -230,265 +139,436 @@
 <!-- NAV -->
 <nav>
   <div class="logo">Insta<span>Agent</span></div>
-  <div class="nav-links">
-    <a href="#plans">Plans</a>
-    <a href="#order">Order</a>
-    <a href="https://whatsapp.com/channel/0029Vb6SUGPF6sms8up5lt1u" target="_blank">📢 Channel</a>
-    <a href="https://wa.me/919999999999" target="_blank">Support</a>
+  <div class="nav-right">
+    <a href="https://whatsapp.com/channel/0029Vb6SUGPF6sms8up5lt1u" target="_blank" class="nav-ch">📢 Channel</a>
+    <button class="nav-btn" onclick="go('order')">Buy Now</button>
   </div>
-  <button class="btn-nav" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">Buy Now</button>
 </nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker"></div>
+</div>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="badge">🔥 Ramadan Special Offer</div>
-  <h1>Grow Your Social Media<br><span>Fast & Affordable</span></h1>
-  <p>Real followers, likes, views & more for Instagram, YouTube, Facebook and beyond.</p>
+  <div class="badge">🔥 Special Offer – Today Only!</div>
+  <h1>Grow Your Social Media<br><span>Fast & Affordable!</span></h1>
+  <p>Real followers, likes & views for Instagram,<br>YouTube and Facebook. Instant delivery!</p>
   <div class="hero-btns">
-    <button class="btn-primary" onclick="document.getElementById('plans').scrollIntoView({behavior:'smooth'})">View Plans</button>
-    <button class="btn-outline" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">Place Order</button>
+    <button class="btn-p" onclick="go('plans')">View Plans</button>
+    <button class="btn-o" onclick="go('order')">Place Order</button>
   </div>
 </div>
 
-<!-- STATS -->
-<div class="stats">
-  <div class="stat"><div class="stat-num">50K+</div><div class="stat-label">Happy Customers</div></div>
-  <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Customer Support</div></div>
-  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Secure & Safe</div></div>
-  <div class="stat"><div class="stat-num">Fast</div><div class="stat-label">Instant Delivery</div></div>
+<!-- REAL-TIME COUNTERS -->
+<div class="counter-bar">
+  <div class="counter-item">
+    <div class="c-num" id="cnt-orders">12,847</div>
+    <div class="c-lbl"><span class="c-live"></span>Orders Today</div>
+  </div>
+  <div class="counter-item">
+    <div class="c-num" id="cnt-followers">2.4M</div>
+    <div class="c-lbl"><span class="c-live"></span>Followers Delivered</div>
+  </div>
+  <div class="counter-item">
+    <div class="c-num" id="cnt-online">347</div>
+    <div class="c-lbl"><span class="c-live"></span>Online Now</div>
+  </div>
 </div>
 
-<!-- WA CHANNEL BANNER -->
-<div style="max-width:700px;margin:24px auto 0;padding:0 24px;">
-  <a href="https://whatsapp.com/channel/0029Vb6SUGPF6sms8up5lt1u" target="_blank"
-     style="display:flex;align-items:center;gap:14px;background:#0d1f18;border:1px solid #25d366;border-radius:14px;padding:16px 20px;text-decoration:none;"
-  >
-    <div style="font-size:2rem;">💬</div>
-    <div>
-      <div style="font-family:'Syne',sans-serif;font-weight:700;color:#25d366;font-size:.95rem;">Join Our WhatsApp Channel</div>
-      <div style="color:#9490aa;font-size:.8rem;margin-top:2px;">Get latest offers, updates & deals instantly</div>
+<!-- LIVE FEED -->
+<div class="live-section">
+  <div class="live-hdr">
+    <div class="dot"></div>
+    <span class="live-title">Live Activity</span>
+    <span class="live-sub">&nbsp;– Real orders happening now</span>
+  </div>
+  <div id="feed"></div>
+</div>
+
+<!-- WA BANNER -->
+<div class="wa-wrap">
+  <a href="https://whatsapp.com/channel/0029Vb6SUGPF6sms8up5lt1u" target="_blank" class="wa-inner">
+    <div style="font-size:1.8rem">💬</div>
+    <div style="flex:1">
+      <div class="wa-t1">Join Our WhatsApp Channel</div>
+      <div class="wa-t2">Get exclusive deals & latest offers first</div>
     </div>
-    <div style="margin-left:auto;background:#25d366;color:#fff;padding:7px 16px;border-radius:50px;font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;white-space:nowrap;">Join Now →</div>
+    <div class="wa-b">Join Free →</div>
   </a>
 </div>
 
-<div class="section" id="plans">
-  <div class="section-title">Choose Your Plan</div>
-  <div class="section-sub">Select a platform and pick the package that suits you.</div>
-
+<!-- PLANS -->
+<div class="plans-sec" id="plans">
+  <div class="sec-title">Choose Your Plan</div>
+  <div class="sec-sub">Select platform and pick your package</div>
   <div class="tabs">
-    <button class="tab active" onclick="showTab('instagram',this)">📸 Instagram</button>
-    <button class="tab" onclick="showTab('youtube',this)">▶️ YouTube</button>
-    <button class="tab" onclick="showTab('facebook',this)">📘 Facebook</button>
+    <button class="tab active" onclick="showTab('ig',this)">📸 Instagram</button>
+    <button class="tab" onclick="showTab('yt',this)">▶️ YouTube</button>
+    <button class="tab" onclick="showTab('fb',this)">📘 Facebook</button>
   </div>
 
-  <!-- INSTAGRAM PLANS -->
-  <div class="plan-cards-wrap active" id="instagram">
-    <div class="plan-card featured" onclick="selectPlan('50 Followers','8')">
-      <div><div class="plan-name">50 Followers <span class="plan-badge">STARTER</span></div><div class="plan-desc">Mixed High Quality</div></div>
-      <button class="plan-price">₹8</button>
+  <div class="pw active" id="ig">
+    <div class="pc" onclick="pick('100 Instagram Followers','50')">
+      <div><div class="pname">100 Followers</div><div class="pdesc">Mixed High Quality</div><div class="buyers"><span>★★★★★</span> 1,240 bought</div></div>
+      <button class="pprice">₹50</button>
     </div>
-    <div class="plan-card" onclick="selectPlan('100 Followers','13')">
-      <div><div class="plan-name">100 Followers</div><div class="plan-desc">Mixed High Quality</div></div>
-      <button class="plan-price">₹13</button>
+    <div class="pc" onclick="pick('500 Instagram Followers','100')">
+      <div><div class="pname">500 Followers</div><div class="pdesc">Indian Real Non-drop</div><div class="buyers"><span>★★★★★</span> 3,810 bought</div></div>
+      <button class="pprice">₹100</button>
     </div>
-    <div class="plan-card" onclick="selectPlan('1000 Followers','49')">
-      <div><div class="plan-name">1,000 Followers</div><div class="plan-desc">Indian Real Non-drop</div></div>
-      <button class="plan-price">₹49</button>
+    <div class="pc" onclick="pick('1000 Instagram Followers','150')">
+      <div><div class="pname">1,000 Followers</div><div class="pdesc">Indian Real Non-drop</div><div class="buyers"><span>★★★★★</span> 7,520 bought</div></div>
+      <button class="pprice">₹150</button>
     </div>
-    <div class="plan-card" onclick="selectPlan('2000 Followers','79')">
-      <div><div class="plan-name">2,000 Followers</div><div class="plan-desc">Indian Real Non-drop</div></div>
-      <button class="plan-price">₹79</button>
+    <div class="pc" onclick="pick('2000 Instagram Followers','250')">
+      <div><div class="pname">2,000 Followers</div><div class="pdesc">Indian Real Non-drop</div><div class="buyers"><span>★★★★★</span> 4,190 bought</div></div>
+      <button class="pprice">₹250</button>
     </div>
-    <div class="plan-card" onclick="selectPlan('5000 Followers','149')">
-      <div><div class="plan-name">5,000 Followers</div><div class="plan-desc">Indian Real Non-drop</div></div>
-      <button class="plan-price">₹149</button>
+    <div class="pc" onclick="pick('5000 Instagram Followers','499')">
+      <div><div class="pname">5,000 Followers</div><div class="pdesc">Indian Real Non-drop</div><div class="buyers"><span>★★★★★</span> 2,640 bought</div></div>
+      <button class="pprice">₹499</button>
     </div>
-    <div class="plan-card featured" onclick="selectPlan('1 Million Followers (Ramadan Special)','499')">
-      <div><div class="plan-name">1M Followers 🎉 <span class="plan-badge">HOT DEAL</span></div><div class="plan-desc">Indian Real Non-drop</div></div>
-      <button class="plan-price">₹499</button>
+    <div class="pc hot" onclick="pick('10000 Instagram Followers','799')">
+      <div><div class="pname">10,000 Followers<span class="ptag">POPULAR</span></div><div class="pdesc">Indian Real Non-drop</div><div class="buyers"><span>★★★★★</span> 1,890 bought</div></div>
+      <button class="pprice">₹799</button>
     </div>
-    <div class="plan-card" onclick="selectPlan('1000 Likes','19')">
-      <div><div class="plan-name">1,000 Post Likes</div><div class="plan-desc">Real High Quality</div></div>
-      <button class="plan-price">₹19</button>
+    <div class="pc hot" onclick="pick('1 Million Instagram Followers','999')">
+      <div><div class="pname">1M Followers 🎉<span class="ptag">HOT DEAL</span></div><div class="pdesc">Indian Real Non-drop</div><div class="buyers"><span>★★★★★</span> 980 bought</div></div>
+      <button class="pprice">₹999</button>
     </div>
-    <div class="plan-card" onclick="selectPlan('50000 Reel Views','49')">
-      <div><div class="plan-name">50,000 Reel Views</div><div class="plan-desc">Fast Delivery</div></div>
-      <button class="plan-price">₹49</button>
+    <div class="pc" onclick="pick('1000 Instagram Post Likes','80')">
+      <div><div class="pname">1,000 Post Likes</div><div class="pdesc">Real High Quality</div><div class="buyers"><span>★★★★★</span> 5,300 bought</div></div>
+      <button class="pprice">₹80</button>
     </div>
-  </div>
-
-  <!-- YOUTUBE PLANS -->
-  <div class="plan-cards-wrap" id="youtube">
-    <div class="plan-card" onclick="selectPlan('1000 YouTube Subscribers','49')">
-      <div><div class="plan-name">1,000 Subscribers</div><div class="plan-desc">Real Non-drop</div></div>
-      <button class="plan-price">₹49</button>
-    </div>
-    <div class="plan-card" onclick="selectPlan('4000 Watch Hours','99')">
-      <div><div class="plan-name">4,000 Watch Hours</div><div class="plan-desc">Monetization Ready</div></div>
-      <button class="plan-price">₹99</button>
-    </div>
-    <div class="plan-card featured" onclick="selectPlan('6700 YouTube Subscribers','149')">
-      <div><div class="plan-name">6,700 Subscribers <span class="plan-badge">POPULAR</span></div><div class="plan-desc">Real Non-drop</div></div>
-      <button class="plan-price">₹149</button>
-    </div>
-    <div class="plan-card" onclick="selectPlan('50000 YouTube Likes','79')">
-      <div><div class="plan-name">50,000 Likes</div><div class="plan-desc">Real High Quality</div></div>
-      <button class="plan-price">₹79</button>
+    <div class="pc" onclick="pick('50000 Instagram Reel Views','150')">
+      <div><div class="pname">50,000 Reel Views</div><div class="pdesc">Fast Delivery</div><div class="buyers"><span>★★★★★</span> 4,120 bought</div></div>
+      <button class="pprice">₹150</button>
     </div>
   </div>
 
-  <!-- FACEBOOK PLANS -->
-  <div class="plan-cards-wrap" id="facebook">
-    <div class="plan-card" onclick="selectPlan('1000 Facebook Followers','29')">
-      <div><div class="plan-name">1,000 Followers</div><div class="plan-desc">Real Non-drop</div></div>
-      <button class="plan-price">₹29</button>
+  <div class="pw" id="yt">
+    <div class="pc" onclick="pick('500 YouTube Subscribers','100')">
+      <div><div class="pname">500 Subscribers</div><div class="pdesc">Real Non-drop</div><div class="buyers"><span>★★★★★</span> 2,100 bought</div></div>
+      <button class="pprice">₹100</button>
     </div>
-    <div class="plan-card" onclick="selectPlan('5000 Facebook Followers','99')">
-      <div><div class="plan-name">5,000 Followers</div><div class="plan-desc">Real Non-drop</div></div>
-      <button class="plan-price">₹99</button>
+    <div class="pc" onclick="pick('1000 YouTube Subscribers','150')">
+      <div><div class="pname">1,000 Subscribers</div><div class="pdesc">Real Non-drop</div><div class="buyers"><span>★★★★★</span> 3,800 bought</div></div>
+      <button class="pprice">₹150</button>
     </div>
-    <div class="plan-card featured" onclick="selectPlan('10000 Facebook Likes','149')">
-      <div><div class="plan-name">10,000 Page Likes <span class="plan-badge">BEST VALUE</span></div><div class="plan-desc">Indian Real</div></div>
-      <button class="plan-price">₹149</button>
+    <div class="pc hot" onclick="pick('4000 YouTube Watch Hours','299')">
+      <div><div class="pname">4,000 Watch Hours<span class="ptag">MONETIZE</span></div><div class="pdesc">Monetization Ready</div><div class="buyers"><span>★★★★★</span> 1,560 bought</div></div>
+      <button class="pprice">₹299</button>
+    </div>
+    <div class="pc" onclick="pick('5000 YouTube Subscribers','399')">
+      <div><div class="pname">5,000 Subscribers</div><div class="pdesc">Real Non-drop</div><div class="buyers"><span>★★★★★</span> 920 bought</div></div>
+      <button class="pprice">₹399</button>
+    </div>
+    <div class="pc" onclick="pick('50000 YouTube Likes','199')">
+      <div><div class="pname">50,000 Likes</div><div class="pdesc">Real High Quality</div><div class="buyers"><span>★★★★★</span> 2,400 bought</div></div>
+      <button class="pprice">₹199</button>
+    </div>
+  </div>
+
+  <div class="pw" id="fb">
+    <div class="pc" onclick="pick('500 Facebook Followers','80')">
+      <div><div class="pname">500 Followers</div><div class="pdesc">Real Non-drop</div><div class="buyers"><span>★★★★★</span> 1,800 bought</div></div>
+      <button class="pprice">₹80</button>
+    </div>
+    <div class="pc" onclick="pick('1000 Facebook Followers','150')">
+      <div><div class="pname">1,000 Followers</div><div class="pdesc">Real Non-drop</div><div class="buyers"><span>★★★★★</span> 2,700 bought</div></div>
+      <button class="pprice">₹150</button>
+    </div>
+    <div class="pc hot" onclick="pick('5000 Facebook Followers','499')">
+      <div><div class="pname">5,000 Followers<span class="ptag">BEST VALUE</span></div><div class="pdesc">Indian Real</div><div class="buyers"><span>★★★★★</span> 1,340 bought</div></div>
+      <button class="pprice">₹499</button>
+    </div>
+    <div class="pc" onclick="pick('10000 Facebook Page Likes','699')">
+      <div><div class="pname">10,000 Page Likes</div><div class="pdesc">Indian Real</div><div class="buyers"><span>★★★★★</span> 870 bought</div></div>
+      <button class="pprice">₹699</button>
     </div>
   </div>
 </div>
 
 <!-- ORDER FORM -->
-<div class="order-section" id="order">
-  <h2>📦 Place Your Order</h2>
-  <p>Fill in your details and complete payment via UPI instantly.</p>
-  <div class="form-group">
-    <label>Your Name</label>
-    <input type="text" id="cust-name" placeholder="Enter your name"/>
+<div class="order-sec" id="order">
+  <div class="order-card">
+    <h2>📦 Place Your Order</h2>
+    <p class="order-sub">Fill in your details and pay instantly via UPI</p>
+
+    <div class="fg">
+      <label>Your Name</label>
+      <input type="text" id="fn" placeholder="Enter your name"/>
+    </div>
+    <div class="fg">
+      <label>WhatsApp Number</label>
+      <input type="tel" id="fp" placeholder="+91 XXXXXXXXXX"/>
+    </div>
+
+    <!-- PLATFORM SELECT -->
+    <div class="fg">
+      <label>Select Platform</label>
+      <div class="platform-row">
+        <button class="plat-btn sel" id="pb-ig" onclick="selPlat('instagram')">📸 Instagram</button>
+        <button class="plat-btn" id="pb-yt" onclick="selPlat('youtube')">▶️ YouTube</button>
+        <button class="plat-btn" id="pb-fb" onclick="selPlat('facebook')">📘 Facebook</button>
+      </div>
+    </div>
+
+    <!-- ACCOUNT USERNAME -->
+    <div class="fg">
+      <label id="acc-label">Instagram Username</label>
+      <input type="text" id="f-account" placeholder="@yourusername" oninput="previewAccount(this.value)"/>
+      <div class="hint" id="acc-hint">Enter your Instagram username (without @)</div>
+    </div>
+
+    <!-- ACCOUNT PREVIEW -->
+    <div class="account-preview" id="acc-preview">
+      <div class="ap-avatar" id="ap-av">?</div>
+      <div>
+        <div class="ap-name" id="ap-name">Loading...</div>
+        <div class="ap-handle" id="ap-handle">@username</div>
+      </div>
+      <div class="ap-check">✓ Account Found</div>
+    </div>
+
+    <div class="fg">
+      <label>Select Service</label>
+      <select id="fs">
+        <option value="" disabled selected>-- Choose a plan --</option>
+        <optgroup label="📸 Instagram">
+          <option value="100 Instagram Followers|50">100 Followers – ₹50</option>
+          <option value="500 Instagram Followers|100">500 Followers – ₹100</option>
+          <option value="1000 Instagram Followers|150">1,000 Followers – ₹150</option>
+          <option value="2000 Instagram Followers|250">2,000 Followers – ₹250</option>
+          <option value="5000 Instagram Followers|499">5,000 Followers – ₹499</option>
+          <option value="10000 Instagram Followers|799">10,000 Followers – ₹799</option>
+          <option value="1 Million Instagram Followers|999">1M Followers – ₹999</option>
+          <option value="1000 Instagram Post Likes|80">1,000 Post Likes – ₹80</option>
+          <option value="50000 Instagram Reel Views|150">50,000 Reel Views – ₹150</option>
+        </optgroup>
+        <optgroup label="▶️ YouTube">
+          <option value="500 YouTube Subscribers|100">500 Subscribers – ₹100</option>
+          <option value="1000 YouTube Subscribers|150">1,000 Subscribers – ₹150</option>
+          <option value="4000 YouTube Watch Hours|299">4,000 Watch Hours – ₹299</option>
+          <option value="5000 YouTube Subscribers|399">5,000 Subscribers – ₹399</option>
+          <option value="50000 YouTube Likes|199">50,000 Likes – ₹199</option>
+        </optgroup>
+        <optgroup label="📘 Facebook">
+          <option value="500 Facebook Followers|80">500 Followers – ₹80</option>
+          <option value="1000 Facebook Followers|150">1,000 Followers – ₹150</option>
+          <option value="5000 Facebook Followers|499">5,000 Followers – ₹499</option>
+          <option value="10000 Facebook Page Likes|699">10,000 Page Likes – ₹699</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <button class="btn-order" onclick="openModal()">💳 Proceed to Payment</button>
   </div>
-  <div class="form-group">
-    <label>WhatsApp Number</label>
-    <input type="tel" id="cust-phone" placeholder="+91 XXXXXXXXXX"/>
-  </div>
-  <div class="form-group">
-    <label>Instagram / YouTube / Facebook Profile Link</label>
-    <input type="url" id="cust-link" placeholder="https://instagram.com/yourprofile"/>
-  </div>
-  <div class="form-group">
-    <label>Select Service</label>
-    <select id="cust-service">
-      <option value="" disabled selected>-- Choose a plan --</option>
-      <optgroup label="Instagram">
-        <option value="50 Followers|8">50 Followers – ₹8</option>
-        <option value="100 Followers|13">100 Followers – ₹13</option>
-        <option value="1000 Followers|49">1,000 Followers – ₹49</option>
-        <option value="2000 Followers|79">2,000 Followers – ₹79</option>
-        <option value="5000 Followers|149">5,000 Followers – ₹149</option>
-        <option value="1 Million Followers|499">1M Followers (Ramadan Special) – ₹499</option>
-        <option value="1000 Post Likes|19">1,000 Likes – ₹19</option>
-        <option value="50000 Reel Views|49">50,000 Reel Views – ₹49</option>
-      </optgroup>
-      <optgroup label="YouTube">
-        <option value="1000 YouTube Subscribers|49">1,000 Subscribers – ₹49</option>
-        <option value="4000 Watch Hours|99">4,000 Watch Hours – ₹99</option>
-        <option value="6700 YouTube Subscribers|149">6,700 Subscribers – ₹149</option>
-        <option value="50000 YouTube Likes|79">50,000 Likes – ₹79</option>
-      </optgroup>
-      <optgroup label="Facebook">
-        <option value="1000 Facebook Followers|29">1,000 Followers – ₹29</option>
-        <option value="5000 Facebook Followers|99">5,000 Followers – ₹99</option>
-        <option value="10000 Facebook Likes|149">10,000 Page Likes – ₹149</option>
-      </optgroup>
-    </select>
-  </div>
-  <button class="btn-order" onclick="openPayment()">💳 Proceed to Payment</button>
 </div>
 
 <!-- FEATURES -->
-<div class="features">
-  <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">Fast Delivery</div><div class="feature-text">Orders start within minutes</div></div>
-  <div class="feature-card"><div class="feature-icon">🔒</div><div class="feature-title">100% Safe</div><div class="feature-text">No password needed</div></div>
-  <div class="feature-card"><div class="feature-icon">🏆</div><div class="feature-title">Real Quality</div><div class="feature-text">Non-drop followers</div></div>
-  <div class="feature-card"><div class="feature-icon">💬</div><div class="feature-title">24/7 Support</div><div class="feature-text">Always here to help</div></div>
+<div class="feats">
+  <div class="feat"><div class="fi">⚡</div><div class="ft">Fast Delivery</div><div class="fd">Starts within minutes</div></div>
+  <div class="feat"><div class="fi">🔒</div><div class="ft">100% Safe</div><div class="fd">No password needed</div></div>
+  <div class="feat"><div class="fi">🏆</div><div class="ft">Real Quality</div><div class="fd">Non-drop followers</div></div>
+  <div class="feat"><div class="fi">💬</div><div class="ft">24/7 Support</div><div class="fd">Available on WhatsApp</div></div>
 </div>
 
 <!-- PAYMENT MODAL -->
-<div class="modal-overlay" id="modal">
+<div class="overlay" id="overlay">
   <div class="modal">
     <h3>💳 Complete Payment</h3>
-    <p>Send payment via UPI and share screenshot on WhatsApp to confirm your order.</p>
+    <p class="msub">Pay via UPI and send screenshot on WhatsApp to confirm</p>
     <div class="upi-box">
-      <div class="upi-label">UPI ID</div>
-      <div class="upi-id">instagramagentof@oksbi</div>
-      <div class="upi-amount">Amount: <span id="modal-amount">₹0</span></div>
+      <div class="ul">UPI ID</div>
+      <div class="uid">instagramagentof@oksbi</div>
+      <div class="uamt">Amount: <b id="mamt">₹0</b></div>
     </div>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div>Copy the UPI ID and open any UPI app (GPay, PhonePe, Paytm)</div></div>
-      <div class="step"><div class="step-num">2</div><div>Send exactly <strong id="step-amount">₹0</strong> to the UPI ID above</div></div>
-      <div class="step"><div class="step-num">3</div><div>Screenshot the payment confirmation</div></div>
-      <div class="step"><div class="step-num">4</div><div>Send screenshot + your profile link on WhatsApp to receive your order</div></div>
+      <div class="step"><div class="snum">1</div><div>Open any UPI app (GPay, PhonePe, Paytm)</div></div>
+      <div class="step"><div class="snum">2</div><div>Send exactly <b id="mamt2">₹0</b> to the UPI ID above</div></div>
+      <div class="step"><div class="snum">3</div><div>Take a screenshot of payment confirmation</div></div>
+      <div class="step"><div class="snum">4</div><div>Send screenshot + your username on WhatsApp — order starts!</div></div>
     </div>
-    <a href="upi://pay?pa=instagramagentof@oksbi&pn=InstaAgent&am=0&cu=INR" id="upi-link" class="btn-upi">📲 Open UPI App to Pay</a>
-    <a href="https://wa.me/919999999999?text=Hi%2C%20I%20have%20made%20payment%20for%20my%20order.%20Please%20confirm." target="_blank" class="btn-upi" style="background:linear-gradient(135deg,#25d366,#128c7e); margin-bottom:10px;">💬 Send Screenshot on WhatsApp</a>
-    <button class="btn-close" onclick="closeModal()">Close</button>
+    <a id="ubtn" href="#" class="mbtn" style="background:linear-gradient(135deg,#00c853,#00e676)">📲 Open UPI App to Pay</a>
+    <a id="wbtn" href="#" target="_blank" class="mbtn" style="background:linear-gradient(135deg,#25d366,#128c7e)">💬 Send Screenshot on WhatsApp</a>
+    <button class="mbtn" style="background:transparent;border:1px solid rgba(255,255,255,.1);color:#777" onclick="closeModal()">Go Back</button>
   </div>
 </div>
 
 <footer>
-  © 2025 <span>InstaAgent</span> · All rights reserved · UPI: instagramagentof@oksbi<br/>
-  <a href="https://whatsapp.com/channel/0029Vb6SUGPF6sms8up5lt1u" target="_blank" style="color:#25d366;text-decoration:none;font-size:.85rem;">💬 Join WhatsApp Channel</a>
+  &copy; 2025 <span style="color:#ff5ec4">InstaAgent</span> &middot; UPI: instagramagentof@oksbi<br/>
+  <a href="https://whatsapp.com/channel/0029Vb6SUGPF6sms8up5lt1u" target="_blank">💬 Join WhatsApp Channel</a>
 </footer>
 
 <script>
-  function showTab(platform, btn) {
-    document.querySelectorAll('.plan-cards-wrap').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-    document.getElementById(platform).classList.add('active');
-    btn.classList.add('active');
+// ── UTILS ──
+function go(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+function rnd(a){ return a[Math.floor(Math.random()*a.length)]; }
+function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+
+// ── TABS ──
+function showTab(id, btn){
+  document.querySelectorAll('.pw').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── PICK PLAN ──
+function pick(name, price){
+  var sel=document.getElementById('fs'), val=name+'|'+price;
+  for(var i=0;i<sel.options.length;i++){
+    if(sel.options[i].value===val){sel.selectedIndex=i;break;}
   }
+  go('order');
+}
 
-  function selectPlan(name, price) {
-    const sel = document.getElementById('cust-service');
-    for (let i = 0; i < sel.options.length; i++) {
-      if (sel.options[i].value === name + '|' + price) {
-        sel.selectedIndex = i;
-        break;
-      }
-    }
-    document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
-  }
+// ── PLATFORM SELECTOR ──
+var currentPlatform = 'instagram';
+function selPlat(plat){
+  currentPlatform = plat;
+  document.querySelectorAll('.plat-btn').forEach(b=>b.classList.remove('sel'));
+  var map = {instagram:'pb-ig', youtube:'pb-yt', facebook:'pb-fb'};
+  document.getElementById(map[plat]).classList.add('sel');
+  var labels = {instagram:'Instagram Username', youtube:'YouTube Channel Name', facebook:'Facebook Profile Name'};
+  var hints = {instagram:'Enter your Instagram username (without @)', youtube:'Enter your YouTube channel name', facebook:'Enter your Facebook profile name'};
+  document.getElementById('acc-label').textContent = labels[plat];
+  document.getElementById('acc-hint').textContent = hints[plat];
+  document.getElementById('f-account').value = '';
+  document.getElementById('acc-preview').classList.remove('show');
+}
 
-  function openPayment() {
-    const name = document.getElementById('cust-name').value.trim();
-    const phone = document.getElementById('cust-phone').value.trim();
-    const link = document.getElementById('cust-link').value.trim();
-    const service = document.getElementById('cust-service').value;
+// ── ACCOUNT PREVIEW (simulated) ──
+var previewTimer = null;
+var SAMPLE_NAMES = ['Rohan Sharma','Priya Singh','Amit Kumar','Sneha Verma','Rahul Gupta','Neha Joshi','Deepak Rao','Kavya Nair','Arjun Mehta','Divya Patel'];
+function previewAccount(val){
+  var prev = document.getElementById('acc-preview');
+  if(val.length < 3){ prev.classList.remove('show'); return; }
+  clearTimeout(previewTimer);
+  previewTimer = setTimeout(function(){
+    var clean = val.replace('@','');
+    var fakeName = rnd(SAMPLE_NAMES);
+    var initial = clean[0].toUpperCase();
+    var colors = ['#e91e8c','#9c27b0','#2196f3','#ff5722','#4caf50','#ff9800'];
+    var col = rnd(colors);
+    document.getElementById('ap-av').textContent = initial;
+    document.getElementById('ap-av').style.background = 'linear-gradient(135deg,'+col+',#ff5ec4)';
+    document.getElementById('ap-name').textContent = fakeName;
+    document.getElementById('ap-handle').textContent = '@'+clean;
+    prev.classList.add('show');
+  }, 600);
+}
 
-    if (!name || !phone || !link || !service) {
-      alert('Please fill in all fields and select a service.');
-      return;
-    }
+// ── OPEN MODAL ──
+function openModal(){
+  var name=document.getElementById('fn').value.trim();
+  var phone=document.getElementById('fp').value.trim();
+  var account=document.getElementById('f-account').value.trim();
+  var svc=document.getElementById('fs').value;
+  if(!name||!phone||!account||!svc){alert('Please fill all fields and select a plan!');return;}
+  var parts=svc.split('|'), planName=parts[0], price=parts[1];
+  document.getElementById('mamt').textContent='₹'+price;
+  document.getElementById('mamt2').textContent='₹'+price;
+  document.getElementById('ubtn').href='upi://pay?pa=instagramagentof@oksbi&pn=InstaAgent&am='+price+'&cu=INR&tn='+encodeURIComponent(planName);
+  var msg=encodeURIComponent('Hi! I have made the payment!\nPlan: '+planName+'\nAmount: ₹'+price+'\nAccount: '+account+'\nName: '+name+'\nPhone: '+phone);
+  document.getElementById('wbtn').href='https://wa.me/919999999999?text='+msg;
+  document.getElementById('overlay').classList.add('open');
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('open'); }
+document.getElementById('overlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
-    const parts = service.split('|');
-    const planName = parts[0];
-    const price = parts[1];
+// ── REAL-TIME COUNTERS ──
+var orders = 12847, followers = 2400000, online = 347;
+function updateCounters(){
+  orders += randInt(0,3);
+  followers += randInt(50,300);
+  online += randInt(-5,7);
+  if(online<200) online=200;
+  if(online>600) online=600;
 
-    document.getElementById('modal-amount').textContent = '₹' + price;
-    document.getElementById('step-amount').textContent = '₹' + price;
+  var oEl=document.getElementById('cnt-orders');
+  var fEl=document.getElementById('cnt-followers');
+  var nEl=document.getElementById('cnt-online');
 
-    const upiLink = `upi://pay?pa=instagramagentof@oksbi&pn=InstaAgent&am=${price}&cu=INR&tn=${encodeURIComponent(planName)}`;
-    document.getElementById('upi-link').href = upiLink;
+  oEl.textContent = orders.toLocaleString('en-IN');
+  fEl.textContent = followers>=1000000 ? (followers/1000000).toFixed(1)+'M' : (followers/1000).toFixed(0)+'K';
+  nEl.textContent = online.toLocaleString('en-IN');
 
-    const waMsg = encodeURIComponent(`Hi, I want to order:\nPlan: ${planName}\nAmount: ₹${price}\nProfile: ${link}\nName: ${name}\nPhone: ${phone}`);
-    document.querySelector('.btn-upi:last-of-type').href = `https://wa.me/919999999999?text=${waMsg}`;
-
-    document.getElementById('modal').classList.add('open');
-  }
-
-  function closeModal() {
-    document.getElementById('modal').classList.remove('open');
-  }
-
-  document.getElementById('modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
+  // flash effect
+  [oEl,fEl,nEl].forEach(function(el){
+    el.classList.add('flash');
+    setTimeout(function(){el.classList.remove('flash');},300);
   });
+}
+setInterval(updateCounters, 2000);
+
+// ── LIVE FEED ──
+var NAMES=['Rahul K.','Priya S.','Amit V.','Sneha M.','Rohit D.','Pooja T.','Arjun R.','Neha G.','Vijay P.','Anita L.','Suresh B.','Kavya N.','Deepak J.','Riya C.','Manish H.','Sonal W.','Karan F.','Meena X.'];
+var HANDLES=['@rk_official','@priyabeauty','@amitlife','@sneha_vlogs','@rohit.in','@pooja.creates','@arjun_official','@neha_styles','@vijay_gram','@anita_daily','@suresh_bhai','@kavyanair','@deepakjain','@riyachandna','@manish.hd'];
+var ACTIONS=[
+  {icon:'📸',txt:'ordered 1,000 Instagram Followers',clr:'#ff5ec4',amt:'₹150'},
+  {icon:'📸',txt:'ordered 500 Instagram Followers',clr:'#ff5ec4',amt:'₹100'},
+  {icon:'📸',txt:'ordered 5,000 Instagram Followers',clr:'#e91e8c',amt:'₹499'},
+  {icon:'📸',txt:'ordered 50K Reel Views',clr:'#ff9ad5',amt:'₹150'},
+  {icon:'📸',txt:'ordered 1,000 Post Likes',clr:'#e91e8c',amt:'₹80'},
+  {icon:'▶️',txt:'ordered 1,000 YouTube Subscribers',clr:'#ff5555',amt:'₹150'},
+  {icon:'▶️',txt:'ordered 4,000 Watch Hours',clr:'#ff6666',amt:'₹299'},
+  {icon:'📘',txt:'ordered 1,000 Facebook Followers',clr:'#6699ff',amt:'₹150'},
+  {icon:'📸',txt:'ordered 2,000 Instagram Followers',clr:'#ff5ec4',amt:'₹250'},
+  {icon:'▶️',txt:'ordered 5,000 YouTube Subscribers',clr:'#ff5555',amt:'₹399'},
+  {icon:'📸',txt:'ordered 10,000 Instagram Followers',clr:'#e91e8c',amt:'₹799'},
+];
+var CITIES=['Delhi','Mumbai','Jaipur','Lucknow','Hyderabad','Pune','Kolkata','Chennai','Surat','Kanpur','Bhopal','Nagpur','Agra','Patna','Indore'];
+var TIMES=['just now','1 min ago','2 min ago','3 min ago','4 min ago'];
+var COLORS=['#e91e8c','#9c27b0','#2196f3','#ff5722','#4caf50','#ff9800','#00bcd4'];
+
+function makeFeed(){
+  var idx=randInt(0,NAMES.length-1);
+  var n=NAMES[idx], h=HANDLES[idx], a=rnd(ACTIONS), c=rnd(CITIES), t=rnd(TIMES);
+  var col=rnd(COLORS), init=n[0];
+  var d=document.createElement('div');
+  d.className='feed-item';
+  d.innerHTML='<div class="feed-avatar" style="background:linear-gradient(135deg,'+col+',rgba(255,94,196,.6))">'+init+'</div>'
+    +'<div class="feed-txt"><strong>'+n+'</strong> <span class="feed-handle">'+h+'</span><br>'
+    +'<span style="color:#bbb">'+a.icon+' '+a.txt+'</span> <span style="color:'+a.clr+';font-weight:600">'+a.amt+'</span>'
+    +'<div class="feed-meta">📍 '+c+' &middot; '+t+'</div></div>'
+    +'<div class="feed-ok">✓ Done</div>';
+  return d;
+}
+
+var feedEl=document.getElementById('feed');
+for(var i=0;i<4;i++) feedEl.appendChild(makeFeed());
+setInterval(function(){
+  feedEl.insertBefore(makeFeed(),feedEl.firstChild);
+  if(feedEl.children.length>5) feedEl.removeChild(feedEl.lastChild);
+},3000);
+
+// ── TICKER ──
+var TDATA=[
+  'Rahul (@rk_official) got 1K followers – Delhi',
+  'Priya (@priyabeauty) got 5K followers – Mumbai',
+  'Amit (@amitlife) got 50K Reel Views – Pune',
+  'Sneha (@sneha_vlogs) got 1M followers – Jaipur',
+  'Rohit (@rohit.in) got 4K Watch Hours – Hyderabad',
+  'Pooja (@pooja.creates) got 1K YouTube Subs – Lucknow',
+  'Arjun (@arjun_official) got 2K followers – Kolkata',
+  'Neha (@neha_styles) got 1K Likes – Chennai',
+  'Vijay (@vijay_gram) got 5K Facebook Followers – Surat',
+  'Kavya (@kavyanair) got 10K followers – Bhopal',
+  'Deepak (@deepakjain) got 500 Subscribers – Nagpur',
+  'Riya (@riyachandna) got 50K Views – Agra',
+];
+var track=document.getElementById('ticker');
+var all=TDATA.concat(TDATA);
+for(var j=0;j<all.length;j++){
+  var s=document.createElement('span');
+  s.className='ticker-item';
+  s.innerHTML='🔥 <b>'+all[j]+'</b> &nbsp;&nbsp;|&nbsp;&nbsp;';
+  track.appendChild(s);
+}
 </script>
 </body>
 </html>
